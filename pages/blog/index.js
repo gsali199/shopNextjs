@@ -23,8 +23,9 @@ const blog = ({ data }) => {
             <h3>{curElem.id}</h3>
             <img src={curElem.image} height="90px" width="90px"/>
             <h2>${curElem.price}</h2>
-            <Link href={`/blog/${curElem.id}`}>
               <h2>{curElem.title}</h2>
+              <Link href={`/blog/${curElem.id}`}>
+              <button>View More</button>
             </Link>
           </div>
         );

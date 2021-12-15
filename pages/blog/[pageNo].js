@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar";
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const res = await fetch("https://fakestoreapi.com/products/");
   const data = await res.json();
 
   const paths = data.map((curElem) => {
@@ -20,7 +20,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.pageNo;
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  const res = await fetch(`https://fakestoreapi.com/products/${id}`);
   const data = await res.json();
 
   return {
@@ -31,17 +31,19 @@ export const getStaticProps = async (context) => {
 };
 
 const myData = ({ data }) => {
-  const { id, title, body } = data;
+  const { id, title, price, image, description, rating } = data;
 
-  console.log("lllllllllllllllllllll", id)
   return (
     <>
       <Navbar />
-      <div className="ssr-styles ssr-styles-inside">
-        <h3>{id}</h3>
-        <h2>{title}</h2>
-        <p>{body}</p>
-      </div>
+      <div key={id} className="ssr-styles">
+            <h3>{id}</h3>
+            <img src={image} height="90px" width="90px"/>
+            <h2>${price}</h2>
+              <h2>{title}</h2>
+              <h2>Customer rating - {rating.rate}/5</h2>
+              <h5>{description}</h5>
+          </div>
     </>
   );
 };
